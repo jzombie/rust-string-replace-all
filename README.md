@@ -1,5 +1,16 @@
 # string-replace-all
 
+[![made-with-rust][rust-logo]][rust-src-page]
+[![crates.io][crates-badge]][crates-page]
+[![Documentation][docs-badge]][docs-page]
+[![MIT licensed][license-badge]][license-page]
+
+| OS            | Status                                                                               |
+|---------------|--------------------------------------------------------------------------------------|
+| Ubuntu-latest | [![Ubuntu Tests][ubuntu-latest-badge]][ubuntu-latest-workflow]                       |
+| macOS-latest  | [![macOS Tests][macos-latest-badge]][macos-latest-workflow]                          |
+| Windows-latest| [![Windows Tests][windows-latest-badge]][windows-latest-workflow]                    |
+
 The `string-replace-all` crate provides a utility to return a new `String` with all occurrences of a pattern replaced by a specified replacement. 
 
 - The pattern can be either a **string slice** or a **`Regex`**.
@@ -46,3 +57,24 @@ cargo test
 ## License
 
 [MIT License](LICENSE) (c) 2025 Jeremy Harris.
+
+[rust-src-page]: https://www.rust-lang.org/
+[rust-logo]: https://img.shields.io/badge/Made%20with-Rust-black?&logo=Rust
+
+[crates-page]: https://crates.io/crates/string-replace-all
+[crates-badge]: https://img.shields.io/crates/v/string-replace-all.svg
+
+[docs-page]: https://docs.rs/string-replace-all
+[docs-badge]: https://docs.rs/string-replace-all/badge.svg
+
+[license-page]: https://github.com/jzombie/rust-string-replace-all/blob/main/LICENSE
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+
+[ubuntu-latest-badge]: https://github.com/jzombie/rust-string-replace-all/actions/workflows/rust-tests.yml/badge.svg?branch=main&job=Run%20Rust%20Tests%20(OS%20=%20ubuntu-latest)
+[ubuntu-latest-workflow]: https://github.com/jzombie/rust-string-replace-all/actions/workflows/rust-tests.yml?query=branch%3Amain
+
+[macos-latest-badge]: https://github.com/jzombie/rust-string-replace-all/actions/workflows/rust-tests.yml/badge.svg?branch=main&job=Run%20Rust%20Tests%20(OS%20=%20macos-latest)
+[macos-latest-workflow]: https://github.com/jzombie/rust-string-replace-all/actions/workflows/rust-tests.yml?query=branch%3Amain
+
+[windows-latest-badge]: https://github.com/jzombie/rust-string-replace-all/actions/workflows/rust-tests.yml/badge.svg?branch=main&job=Run%20Rust%20Tests%20(OS%20=%20windows-latest)
+[windows-latest-workflow]: https://github.com/jzombie/rust-string-replace-all/actions/workflows/rust-tests.yml?query=branch%3Amain

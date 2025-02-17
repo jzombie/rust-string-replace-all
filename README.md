@@ -42,3 +42,7 @@ Run tests with:
 ```sh
 cargo test
 ```
+
+## License
+
+[MIT License](LICENSE) (c) 2025 Jeremy Harris.

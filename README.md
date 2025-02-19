@@ -19,7 +19,7 @@ The `string-replace-all` crate enables `JavaScript-style` string replacement, re
 
 This functionality is inspired by [JavaScript’s `replaceAll()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll), with the key difference that **only string slices are supported as replacements** at this time.
 
-## Installation
+## Install
 
 ```bash
 cargo add string-replace-all

@@ -29,7 +29,7 @@ cargo add string-replace-all
 
 ### Example 1: Using `StringReplaceAll` Trait
 
-The `StringReplaceAll` trait extends String and string slices with a `replace_all` method, allowing for both exact string and regex-based replacements.
+The `StringReplaceAll` trait extends `String` and string slices with a `replace_all` method, allowing for both exact string and regex-based replacements.
 
 ```rust
 use string_replace_all::StringReplaceAll;

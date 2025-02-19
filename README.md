@@ -11,7 +11,7 @@
 | macOS-latest  | [![macOS Tests][macos-latest-badge]][macos-latest-workflow]                          |
 | Windows-latest| [![Windows Tests][windows-latest-badge]][windows-latest-workflow]                    |
 
-The `string-replace-all` crate provides a utility to return a new `String` with all occurrences of a pattern replaced by a specified replacement. 
+The `string-replace-all` crate enables `JavaScript-style` string replacement, returning a new `String` where all occurrences of a pattern are substituted with a specified replacement. It supports both exact matches and regex-based replacements.
 
 - The pattern can be either a **string slice** or a **`Regex`**.
 - The replacement is always a **string slice**.
@@ -19,7 +19,7 @@ The `string-replace-all` crate provides a utility to return a new `String` with 
 
 This functionality is inspired by [JavaScript’s `replaceAll()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll), with the key difference that **only string slices are supported as replacements** at this time.
 
-## Installation
+## Install
 
 ```bash
 cargo add string-replace-all
@@ -27,12 +27,39 @@ cargo add string-replace-all
 
 ## Usage
 
+### Example 1: Using `StringReplaceAll` Trait
+
+The `StringReplaceAll` trait extends `String` and string slices with a `replace_all` method, allowing for both exact string and regex-based replacements.
+
+```rust
+use string_replace_all::StringReplaceAll;
+
+let text = "I think Ruth's dog is cuter than your dog!";
+let result = text.replace_all("dog", "monkey");
+
+assert_eq!(result, "I think Ruth's monkey is cuter than your monkey!");
+```
+
+```rust
+use regex::Regex;
+use string_replace_all::StringReplaceAll;
+
+let text = "I think Ruth's dog is cuter than your dog!";
+let regex = Regex::new("(?i)Dog").unwrap(); // Case-insensitive regex
+
+let result = text.replace_all(&regex, "ferret");
+
+assert_eq!(result, "I think Ruth's ferret is cuter than your ferret!");
+```
+
+### Example 2: Using `string_replace_all` Function
+
 ```rust
 use string_replace_all::string_replace_all;
 
 let text = "I think Ruth's dog is cuter than your dog!";
-
 let result = string_replace_all(text, "dog", "monkey");
+
 assert_eq!(result, "I think Ruth's monkey is cuter than your monkey!");
 ```
 
@@ -44,6 +71,7 @@ let text = "I think Ruth's dog is cuter than your dog!";
 let regex = Regex::new("(?i)Dog").unwrap(); // Case-insensitive regex
 
 let result = string_replace_all(text, &regex, "ferret");
+
 assert_eq!(result, "I think Ruth's ferret is cuter than your ferret!");
 ```
 

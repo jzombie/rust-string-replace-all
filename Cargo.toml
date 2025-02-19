@@ -1,6 +1,6 @@
 [package]
 name = "string-replace-all"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Jeremy Harris <jeremy.harris@zenosmosis.com>"]
 edition = "2021"
 description = "Efficiently replaces all occurrences of a pattern in a string with a specified replacement, supporting both exact matches and regex-based replacements."

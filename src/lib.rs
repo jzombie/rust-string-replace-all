@@ -3,6 +3,80 @@ doc_comment::doctest!("../README.md");
 
 use regex::Regex;
 
+/// A trait that provides a `replace_all` method for `String` and `str` types,
+/// enabling both exact string and regex-based replacements.
+pub trait StringReplaceAll {
+    /// Replaces all occurrences of a pattern with the given replacement.
+    ///
+    /// This method supports:
+    /// - Exact string replacements (`&str`)
+    /// - Regular expression-based replacements (`Regex`)
+    ///
+    /// # Arguments
+    /// * `pattern` - The pattern to search for, which can be either:
+    ///     - A string slice (`&str`) for simple replacements.
+    ///     - A compiled regular expression (`Regex`) for pattern-based replacements.
+    /// * `replacement` - The string that will replace occurrences of the pattern.
+    ///
+    /// # Returns
+    /// A new `String` with all occurrences replaced.
+    ///
+    /// # Examples
+    /// ## Using an exact string match
+    /// ```
+    /// use string_replace_all::StringReplaceAll;
+    ///
+    /// let text = "I think Ruth's dog is cuter than your dog!";
+    /// let result = text.replace_all("dog", "monkey");
+    /// assert_eq!(result, "I think Ruth's monkey is cuter than your monkey!");
+    /// ```
+    ///
+    /// ## Using a regular expression match
+    /// ```
+    /// use regex::Regex;
+    /// use string_replace_all::StringReplaceAll;
+    ///
+    /// let text = "I think Ruth's dog is cuter than your dog!";
+    /// let regex = Regex::new("(?i)Dog").unwrap(); // Case-insensitive regex
+    ///
+    /// let result = text.replace_all(&regex, "ferret");
+    /// assert_eq!(result, "I think Ruth's ferret is cuter than your ferret!");
+    /// ```
+    fn replace_all<'a, P: Into<Pattern<'a>>>(&self, pattern: P, replacement: &str) -> String;
+}
+
+/// Implementation of `StringReplaceAll` for `String`.
+///
+/// This allows direct use of `.replace_all()` on `String` instances.
+impl StringReplaceAll for String {
+    /// Replaces all occurrences of the given pattern in a `String`.
+    ///
+    /// # See also
+    /// - [`replace_all`](StringReplaceAll::replace_all) for details on arguments and behavior.
+    fn replace_all<'a, P: Into<Pattern<'a>>>(&self, pattern: P, replacement: &str) -> String {
+        match pattern.into() {
+            Pattern::Str(s) => self.replace(s, replacement),
+            Pattern::Regex(r) => r.replace_all(self, replacement).to_string(),
+        }
+    }
+}
+
+/// Implementation of `StringReplaceAll` for string slices (`str`).
+///
+/// This allows direct use of `.replace_all()` on `&str` instances.
+impl StringReplaceAll for str {
+    /// Replaces all occurrences of the given pattern in a `&str`, returning a `String`.
+    ///
+    /// This implementation converts the string slice into a `String` and calls
+    /// [`replace_all`](StringReplaceAll::replace_all) on it.
+    ///
+    /// # See also
+    /// - [`replace_all`](StringReplaceAll::replace_all) for details on arguments and behavior.
+    fn replace_all<'a, P: Into<Pattern<'a>>>(&self, pattern: P, replacement: &str) -> String {
+        self.to_string().replace_all(pattern, replacement)
+    }
+}
+
 /// Replaces all occurrences of `from` with `to` in `input`, supporting both exact string and regex replacements.
 ///
 /// This function works as follows:
@@ -194,5 +268,53 @@ mod tests {
 
         let result = string_replace_all(text, &regex, "ferret");
         assert_eq!(result, "I think Ruth's ferret is cuter than your ferret!");
+    }
+}
+
+#[cfg(test)]
+mod trait_tests {
+    use super::StringReplaceAll;
+    use regex::Regex;
+
+    #[test]
+    fn test_string_replace_all() {
+        let input = "Hello world!".to_string();
+        let result = input.replace_all("world", "Rust");
+
+        assert_eq!(result, "Hello Rust!");
+    }
+
+    #[test]
+    fn test_str_replace_all() {
+        let input = "Hello world!";
+        let result = input.replace_all("world", "Rust");
+
+        assert_eq!(result, "Hello Rust!");
+    }
+
+    #[test]
+    fn test_regex_replace_all() {
+        let input = "I love RustLang and rust programming!".to_string();
+        let regex = Regex::new("(?i)rust").unwrap(); // Case-insensitive
+
+        let result = input.replace_all(&regex, "Go");
+
+        assert_eq!(result, "I love GoLang and Go programming!");
+    }
+
+    #[test]
+    fn test_replace_special_characters() {
+        let input = "Replace * special ** characters!".to_string();
+        let result = input.replace_all("*", "-");
+
+        assert_eq!(result, "Replace - special -- characters!");
+    }
+
+    #[test]
+    fn test_replace_entire_string() {
+        let input = "Completely replace this".to_string();
+        let result = input.replace_all("Completely replace this", "Done");
+
+        assert_eq!(result, "Done");
     }
 }

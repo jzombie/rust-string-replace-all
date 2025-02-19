@@ -27,12 +27,39 @@ cargo add string-replace-all
 
 ## Usage
 
+### Example 1: Using `StringReplaceAll` Trait
+
+The `StringReplaceAll` trait extends String and string slices with a `replace_all` method, allowing for both exact string and regex-based replacements.
+
+```rust
+use string_replace_all::StringReplaceAll;
+
+let text = "I think Ruth's dog is cuter than your dog!";
+let result = text.replace_all("dog", "monkey");
+
+assert_eq!(result, "I think Ruth's monkey is cuter than your monkey!");
+```
+
+```rust
+use regex::Regex;
+use string_replace_all::StringReplaceAll;
+
+let text = "I think Ruth's dog is cuter than your dog!";
+let regex = Regex::new("(?i)Dog").unwrap(); // Case-insensitive regex
+
+let result = text.replace_all(&regex, "ferret");
+
+assert_eq!(result, "I think Ruth's ferret is cuter than your ferret!");
+```
+
+### Example 2: Using `string_replace_all` Function
+
 ```rust
 use string_replace_all::string_replace_all;
 
 let text = "I think Ruth's dog is cuter than your dog!";
-
 let result = string_replace_all(text, "dog", "monkey");
+
 assert_eq!(result, "I think Ruth's monkey is cuter than your monkey!");
 ```
 
@@ -44,6 +71,7 @@ let text = "I think Ruth's dog is cuter than your dog!";
 let regex = Regex::new("(?i)Dog").unwrap(); // Case-insensitive regex
 
 let result = string_replace_all(text, &regex, "ferret");
+
 assert_eq!(result, "I think Ruth's ferret is cuter than your ferret!");
 ```
 

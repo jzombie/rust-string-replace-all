@@ -11,7 +11,7 @@
 | macOS-latest  | [![macOS Tests][macos-latest-badge]][macos-latest-workflow]                          |
 | Windows-latest| [![Windows Tests][windows-latest-badge]][windows-latest-workflow]                    |
 
-The `string-replace-al`l crate enables `JavaScript-style` string replacement, returning a new `String` where all occurrences of a pattern are substituted with a specified replacement. It supports both exact matches and regex-based replacements.
+The `string-replace-all` crate enables `JavaScript-style` string replacement, returning a new `String` where all occurrences of a pattern are substituted with a specified replacement. It supports both exact matches and regex-based replacements.
 
 - The pattern can be either a **string slice** or a **`Regex`**.
 - The replacement is always a **string slice**.

@@ -1,6 +1,6 @@
 [package]
 name = "string-replace-all"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["Jeremy Harris <jeremy.harris@zenosmosis.com>"]
 edition = "2021"
 description = "String replacement utility inspired by JavaScript, allowing pattern-based substitutions with support for both exact matches and regex patterns."
@@ -8,5 +8,7 @@ repository = "https://github.com/jzombie/rust-string-replace-all"
 license = "MIT"
 
 [dependencies]
-doc-comment = "0.3.3"
 regex = "1.11.1"
+
+[dev-dependencies]
+doc-comment = "0.3.3"
